@@ -1,66 +1,89 @@
 package com.juanstudy.investmentsequalityjava;
 
+import android.content.Context;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.juanstudy.investmentsequalityjava.databinding.ActivityMainBinding;
-
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.juanstudy.investmentsequalityjava.ViewModels.MainViewModel;
+import com.juanstudy.investmentsequalityjava.adapter.AssetsAdapter;
+import com.juanstudy.investmentsequalityjava.databinding.ActivityMainBinding;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
+    private static MainActivity mainActivity;
     private ActivityMainBinding binding;
+    private MainViewModel viewModel;
+    private AssetsAdapter adapter;
+
+    public static MainActivity getMainActivity() {
+        return mainActivity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mainActivity = this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        setOnClick();
+        setAdapter();
+        setViewModel();
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+        viewModel.getPapersInfo(null);
+    }
+
+    private void setAdapter() {
+        adapter = new AssetsAdapter();
+        binding.listAssets.setAdapter(adapter);
+
+    }
+
+    private void setViewModel() {
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        binding.listAssets.setLayoutManager(new LinearLayoutManager(this));
+        viewModel.getAssets().observe(this, assets -> {
+            adapter.setAssets(assets);
+            binding.listAssets.scrollToPosition(adapter.getItemCount());
+
+//            adapter.notifyDataSetChanged();
         });
+
+//        viewModel.loadData();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    private void setOnClick() {
+        binding.fab.setOnClickListener(view -> {
+
+            getSupportFragmentManager().beginTransaction().add(binding.fragmentContainer.getId(), new DialogAssetFragment()).commit();
+
+        });
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete_all) {
+            viewModel.deleteAll();
+            return true;
+        } else if (id == R.id.action_settings) {
             return true;
         }
 
@@ -68,9 +91,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        mainActivity = this;
+    }
+
+    @Override
+    public void onBackPressed() {
+        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+        if (fragmentList.size() == 0) {
+            super.onBackPressed();
+        } else {
+            for (Fragment frag : fragmentList) {
+                getSupportFragmentManager().beginTransaction().remove(frag).commit();
+            }
+        }
+
     }
 }

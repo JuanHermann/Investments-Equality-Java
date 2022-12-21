@@ -7,22 +7,12 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.juanstudy.investmentsequalityjava.FirstFragment"
+        android:name="com.juanstudy.investmentsequalityjava.DialogAssetFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.juanstudy.investmentsequalityjava.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_dialog_asset" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.juanstudy.investmentsequalityjava.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>
