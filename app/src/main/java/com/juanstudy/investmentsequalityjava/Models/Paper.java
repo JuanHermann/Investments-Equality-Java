@@ -1,30 +1,30 @@
 package com.juanstudy.investmentsequalityjava.Models;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Root;
 
-//@XmlRootElement(name = "Papel")
-//@XmlType(propOrder = { "Codigo", "Nome", "Ibovespa", "Data", "Abertura", "Minimo", "Maximo", "Medio", "Ultimo", "Oscilacao" })
+@Root(name = "Papel")
 public class Paper {
 
-    @XmlAttribute(name = "Codigo")
+    @Attribute(name = "Codigo")
     private String codigo;
-    @XmlAttribute(name = "Nome")
+    @Attribute(name = "Nome")
     private String nome;
-    @XmlAttribute(name = "Ibovespa")
+    @Attribute(name = "Ibovespa")
     private String ibovespa;
-    @XmlAttribute(name = "Data")
+    @Attribute(name = "Data")
     private String data;
-    @XmlAttribute(name = "Abertura")
+    @Attribute(name = "Abertura")
     private String abertura;
-    @XmlAttribute(name = "Minimo")
+    @Attribute(name = "Minimo")
     private String minimo;
-    @XmlAttribute(name = "Maximo")
+    @Attribute(name = "Maximo")
     private String maximo;
-    @XmlAttribute(name = "Medio")
+    @Attribute(name = "Medio")
     private String medio;
-    @XmlAttribute(name = "Ultimo")
+    @Attribute(name = "Ultimo")
     private String ultimo;
-    @XmlAttribute(name = "Oscilacao")
+    @Attribute(name = "Oscilacao")
     private String oscilacao;
 
     public Paper(String codigo, String nome, String ibovespa, String data, String abertura, String minimo, String maximo, String medio, String ultimo, String oscilacao) {
@@ -41,6 +41,11 @@ public class Paper {
     }
 
     public Paper() {
+    }
+
+    public Paper(String codigo, String ultimo) {
+        this.codigo = codigo;
+        this.ultimo = ultimo;
     }
 
     public String getCodigo() {

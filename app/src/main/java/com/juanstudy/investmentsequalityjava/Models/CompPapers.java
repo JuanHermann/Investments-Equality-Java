@@ -1,13 +1,15 @@
 package com.juanstudy.investmentsequalityjava.Models;
 
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+
 import java.io.Serializable;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "ComportamentoPapeis")
+@Root(name = "ComportamentoPapeis")
 public class CompPapers implements Serializable {
+
+    @ElementList(inline = true, name = "Papel")
     private List<Paper> paperList;
 
     public CompPapers(List<Paper> paperList) {
@@ -21,7 +23,6 @@ public class CompPapers implements Serializable {
         return paperList;
     }
 
-    @XmlElement(name = "Papel")
     public void setPaperList(List<Paper> paperList) {
         this.paperList = paperList;
     }

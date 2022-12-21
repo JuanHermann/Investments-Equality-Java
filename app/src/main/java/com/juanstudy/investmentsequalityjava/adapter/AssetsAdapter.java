@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.juanstudy.investmentsequalityjava.Models.Asset;
+import com.juanstudy.investmentsequalityjava.Models.Paper;
 import com.juanstudy.investmentsequalityjava.databinding.AdapterAssetsBinding;
 
 import java.util.ArrayList;
@@ -41,6 +42,19 @@ public class AssetsAdapter extends RecyclerView.Adapter<AssetsAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return assets.size();
+    }
+
+    public void setAssetsData(List<Paper> paperList) {
+
+        for (Paper paper : paperList) {
+            for (Asset asset : assets) {
+                if (paper.getCodigo().equals(asset.getTag())) {
+                    asset.setPrice(Double.parseDouble(paper.getUltimo().replace(",", ".")));
+                    notifyItemChanged(assets.indexOf(asset));
+                }
+            }
+        }
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -6,9 +6,7 @@ import com.juanstudy.investmentsequalityjava.repository.PaperRepository;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainModel {
 
@@ -28,19 +26,9 @@ public class MainModel {
         return model;
     }
 
-    public void getPapers(String papers) {
+    public void getPapers(String papers, Callback<CompPapers> callback) {
 
-        repository.listRepos(papers, new Callback<CompPapers>() {
-            @Override
-            public void onResponse(Call<CompPapers> call, Response<CompPapers> response) {
-                System.out.println(response.body().toString());
-            }
-
-            @Override
-            public void onFailure(Call<CompPapers> call, Throwable t) {
-                System.out.println("ERROR");
-            }
-        });
+        repository.listRepos(papers, callback);
     }
 
 //    public LiveData<List<Asset>> getAssets() {

@@ -24,14 +24,31 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_assets"
+    <TextView
+        android:id="@+id/tv_last_update"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:text="Ultima atualização ás 01:21"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_assets"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
-        tools:listitem="@layout/adapter_assets" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_assets"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/adapter_assets" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -48,9 +65,11 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_dialog_asset" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

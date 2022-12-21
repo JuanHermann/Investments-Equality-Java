@@ -1,13 +1,18 @@
 package com.juanstudy.investmentsequalityjava.ViewModels;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.juanstudy.investmentsequalityjava.Models.Asset;
+import com.juanstudy.investmentsequalityjava.Models.CompPapers;
 import com.juanstudy.investmentsequalityjava.repository.AssetRepository;
 
 import java.util.List;
+
+import retrofit2.Callback;
 
 public class MainViewModel extends ViewModel {
 
@@ -21,8 +26,13 @@ public class MainViewModel extends ViewModel {
         assets = repository.getAllAssets();
     }
 
-    public void getPapersInfo(List<Asset> assets) {
-        model.getPapers("HGLG11");
+    public void getPapersInfo(Callback<CompPapers> callback) {
+        String papers = "";
+        for (Asset asset : assets.getValue()) {
+            papers += asset.getTag() + "|";
+        }
+        Log.i("JUAN", "Papers = " + papers);
+        model.getPapers(papers, callback);
     }
 
     public void loadData() {

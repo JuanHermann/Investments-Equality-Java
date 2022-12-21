@@ -3,7 +3,7 @@ package com.juanstudy.investmentsequalityjava.retrofit;
 import com.juanstudy.investmentsequalityjava.repository.IPaperRepository;
 
 import retrofit2.Retrofit;
-import retrofit2.converter.jaxb.JaxbConverterFactory;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class RetrofitConfig {
 
@@ -15,7 +15,7 @@ public class RetrofitConfig {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl("https://bvmf.bmfbovespa.com.br/cotacoes2000/")
-                    .addConverterFactory(JaxbConverterFactory.create())
+                    .addConverterFactory(SimpleXmlConverterFactory.create())
                     .build();
         }
         return retrofit;
@@ -26,7 +26,7 @@ public class RetrofitConfig {
         if (paperRepository == null) {
             paperRepository = new Retrofit.Builder()
                     .baseUrl("https://bvmf.bmfbovespa.com.br/cotacoes2000/")
-                    .addConverterFactory(JaxbConverterFactory.create())
+                    .addConverterFactory(SimpleXmlConverterFactory.create())
                     .build()
                     .create(IPaperRepository.class);
         }
