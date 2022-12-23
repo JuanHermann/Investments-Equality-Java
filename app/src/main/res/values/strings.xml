@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Investments Equality Java</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -21,4 +21,11 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="last_update">Ultima atualização ás %s</string>
+    <string name="action_delete_all">Deletar todos</string>
+    <string name="add_stock_exchange">Adicionar ação</string>
+    <string name="first_wallet">Primeira carteira</string>
+    <string name="api_error">Erro na API: %s</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
+    <string name="informe_stock_name">Informe o nome da ação</string>
 </resources>

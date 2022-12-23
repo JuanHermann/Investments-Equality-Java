@@ -1,36 +1,24 @@
 package com.juanstudy.investmentsequalityjava.retrofit;
 
-import com.juanstudy.investmentsequalityjava.repository.IPaperRepository;
+import com.juanstudy.investmentsequalityjava.repository.IPaperService;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class RetrofitConfig {
 
-    private static Retrofit retrofit;
-    private static IPaperRepository paperRepository;
+    private static final String API_URL = "https://bvmf.bmfbovespa.com.br/cotacoes2000/";
+    private static IPaperService paperService;
 
-    public static Retrofit getInstance() {
-
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl("https://bvmf.bmfbovespa.com.br/cotacoes2000/")
-                    .addConverterFactory(SimpleXmlConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
-
-    public static IPaperRepository getInstancePaper() {
-
-        if (paperRepository == null) {
-            paperRepository = new Retrofit.Builder()
-                    .baseUrl("https://bvmf.bmfbovespa.com.br/cotacoes2000/")
+    public static IPaperService getInstancePaper() {
+        if (paperService == null) {
+            paperService = new Retrofit.Builder()
+                    .baseUrl(API_URL)
                     .addConverterFactory(SimpleXmlConverterFactory.create())
                     .build()
-                    .create(IPaperRepository.class);
+                    .create(IPaperService.class);
         }
-        return paperRepository;
+        return paperService;
     }
 
 }

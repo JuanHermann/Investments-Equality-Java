@@ -6,9 +6,9 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface IPaperRepository {
+public interface IPaperService {
 
     @GET("FormConsultaCotacoes.asp")
-    Call<CompPapers> listRepos(@Query("strListaCodigos") String papers);
+    Call<CompPapers> papersDataList(@Query("strListaCodigos") String papers);
 
 }

@@ -9,6 +9,8 @@ import com.juanstudy.investmentsequalityjava.Models.Asset;
 import com.juanstudy.investmentsequalityjava.Models.Paper;
 import com.juanstudy.investmentsequalityjava.databinding.AdapterAssetsBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,8 @@ public class AssetsAdapter extends RecyclerView.Adapter<AssetsAdapter.ViewHolder
     }
 
     @Override
-    public AssetsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NotNull
+    public AssetsAdapter.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         AdapterAssetsBinding binding = AdapterAssetsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
 
         return new ViewHolder(binding);
@@ -31,7 +34,6 @@ public class AssetsAdapter extends RecyclerView.Adapter<AssetsAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Asset dataModel = assets.get(position);
         holder.bind(dataModel);
-//        holder.binding.setItemClickListener(this);
     }
 
     public void setAssets(List<Asset> assets) {
@@ -57,7 +59,7 @@ public class AssetsAdapter extends RecyclerView.Adapter<AssetsAdapter.ViewHolder
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public AdapterAssetsBinding binding;
 
         public ViewHolder(AdapterAssetsBinding itemRowBinding) {
@@ -69,8 +71,6 @@ public class AssetsAdapter extends RecyclerView.Adapter<AssetsAdapter.ViewHolder
             binding.tvAssetName.setText(asset.getTag());
             binding.tvAssetDateCom.setText(asset.getId() + "/12");
             binding.tvAssetPercent.setText("R$ " + asset.getPrice().toString());
-//            binding.setVariable(BR.model, obj);
-//            binding.executePendingBindings();
         }
     }
 

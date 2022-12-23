@@ -1,7 +1,5 @@
 package com.juanstudy.investmentsequalityjava.ViewModels;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -31,8 +29,7 @@ public class MainViewModel extends ViewModel {
         for (Asset asset : assets.getValue()) {
             papers += asset.getTag() + "|";
         }
-        Log.i("JUAN", "Papers = " + papers);
-        model.getPapers(papers, callback);
+        model.getPapersDataList(papers, callback);
     }
 
     public void loadData() {

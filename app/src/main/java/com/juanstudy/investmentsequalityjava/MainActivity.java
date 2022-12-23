@@ -2,9 +2,9 @@ package com.juanstudy.investmentsequalityjava;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +18,12 @@ import com.juanstudy.investmentsequalityjava.ViewModels.MainViewModel;
 import com.juanstudy.investmentsequalityjava.adapter.AssetsAdapter;
 import com.juanstudy.investmentsequalityjava.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,34 +63,22 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAssets().observe(this, assets -> {
             adapter.setAssets(assets);
             binding.listAssets.scrollToPosition(adapter.getItemCount());
-
+//todo remove after tests
 //            viewModel.getPapersInfo(getCallbackAssetsInfo());
-
-            testResponse();
 
 
         });
 
     }
 
-    private void testResponse() {
-        List<Paper> papers = new ArrayList<>();
-//        papers.add(new Paper("CPLE6", 11));
-//        papers.add(new Paper("HGLG11", ));
-//        papers.add(new Paper("JSRE11", "16"));
-        adapter.setAssetsData(papers);
-
-    }
 
     private Callback<CompPapers> getCallbackAssetsInfo() {
         return new Callback<CompPapers>() {
             @Override
+            @EverythingIsNonNull
             public void onResponse(Call<CompPapers> call, Response<CompPapers> response) {
                 List<Paper> papers = response.body().getPaperList();
                 if (response.isSuccessful() && papers.size() > 0) {
-
-                    Log.i("JUAN", "Sucesso = " + papers.size());
-                    Toast.makeText(getMainActivity(), "Api retornou", Toast.LENGTH_LONG).show();
                     adapter.setAssetsData(papers);
                     binding.tvLastUpdate.setText(getString(R.string.last_update, papers.get(0).getData().split(" ")[1]));
                     binding.srlAssets.setRefreshing(false);
@@ -98,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
+            @EverythingIsNonNull
             public void onFailure(Call<CompPapers> call, Throwable t) {
-                Log.i("JUAN", "Erro na API = " + t.getMessage());
-                Toast.makeText(getMainActivity(), "Erro na API: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getMainActivity(), getString(R.string.api_error, t.getMessage()), Toast.LENGTH_LONG).show();
                 binding.srlAssets.setRefreshing(false);
 
             }
@@ -115,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setOnClick() {
         binding.fab.setOnClickListener(view -> {
-
+            binding.fragmentContainer.setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction().add(binding.fragmentContainer.getId(), new DialogAssetFragment()).commit();
 
         });
@@ -152,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
             for (Fragment frag : fragmentList) {
                 getSupportFragmentManager().beginTransaction().remove(frag).commit();
             }
+
+            binding.fragmentContainer.setVisibility(View.GONE);
         }
 
     }
