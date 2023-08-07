@@ -4,11 +4,11 @@ import com.juanstudy.investmentsequalityjava.Models.CompPapers;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 public interface IPaperService {
 
-    @GET("FormConsultaCotacoes.asp")
-    Call<CompPapers> papersDataList(@Query("strListaCodigos") String papers);
+    @GET("{papers}")
+    Call<CompPapers> papersDataList(@Path("papers") String papers);
 
 }

@@ -77,10 +77,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             @EverythingIsNonNull
             public void onResponse(Call<CompPapers> call, Response<CompPapers> response) {
-                List<Paper> papers = response.body().getPaperList();
+                List<Paper> papers = response.body().getResults();
                 if (response.isSuccessful() && papers.size() > 0) {
                     adapter.setAssetsData(papers);
-                    binding.tvLastUpdate.setText(getString(R.string.last_update, papers.get(0).getData().split(" ")[1]));
+                    binding.tvLastUpdate.setText(getString(R.string.last_update, papers.get(0).getData().split("T")[1].substring(0,5)));
                     binding.srlAssets.setRefreshing(false);
                 }
             }

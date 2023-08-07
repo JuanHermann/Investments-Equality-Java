@@ -27,7 +27,7 @@ public class MainViewModel extends ViewModel {
     public void getPapersInfo(Callback<CompPapers> callback) {
         String papers = "";
         for (Asset asset : assets.getValue()) {
-            papers += asset.getTag() + "|";
+            papers += asset.getTag() + ",";
         }
         model.getPapersDataList(papers, callback);
     }

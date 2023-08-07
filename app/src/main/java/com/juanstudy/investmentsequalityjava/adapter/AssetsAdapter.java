@@ -50,7 +50,7 @@ public class AssetsAdapter extends RecyclerView.Adapter<AssetsAdapter.ViewHolder
 
         for (Paper paper : paperList) {
             for (Asset asset : assets) {
-                if (paper.getCodigo().equals(asset.getTag())) {
+                if (paper.getCodigo().equals(asset.getTag().toUpperCase())) {
                     asset.setPrice(Double.parseDouble(paper.getUltimo().replace(",", ".")));
                     notifyItemChanged(assets.indexOf(asset));
                 }
