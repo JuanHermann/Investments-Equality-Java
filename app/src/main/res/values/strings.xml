@@ -27,5 +27,7 @@
     <string name="api_error">Erro na API: %s</string>
     <string name="cancel">Cancelar</string>
     <string name="save">Salvar</string>
-    <string name="informe_stock_name">Informe o nome da ação</string>
+    <string name="inform_stock_name">Informe o nome da ação</string>
+    <string name="input_insert">Cadastro</string>
+    <string name="input_edit">Edição</string>
 </resources>

@@ -18,6 +18,8 @@ import com.juanstudy.investmentsequalityjava.ViewModels.MainViewModel;
 import com.juanstudy.investmentsequalityjava.adapter.AssetsAdapter;
 import com.juanstudy.investmentsequalityjava.databinding.ActivityMainBinding;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 List<Paper> papers = response.body().getResults();
                 if (response.isSuccessful() && papers.size() > 0) {
                     adapter.setAssetsData(papers);
-                    binding.tvLastUpdate.setText(getString(R.string.last_update, papers.get(0).getData().split("T")[1].substring(0,5)));
+                    binding.tvLastUpdate.setText(getString(R.string.last_update, SimpleDateFormat.getTimeInstance().format(Calendar.getInstance().getTime())));
                     binding.srlAssets.setRefreshing(false);
                 }
             }

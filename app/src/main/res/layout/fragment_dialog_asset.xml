@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/informe_stock_name"
+            android:text="@string/input_insert"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/toolbar"
@@ -39,17 +39,37 @@
             app:layout_constraintTop_toTopOf="@id/toolbar" />
 
         <androidx.appcompat.widget.AppCompatEditText
-
-            android:id="@+id/et_asset_tag"
+            android:id="@+id/et_stock_name"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:autofillHints="name"
-            android:inputType="text"
+            android:inputType="textCapCharacters"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_stock_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:autofillHints="name"
+            android:inputType="number"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_stock_name" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_stock_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:autofillHints="name"
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_stock_quantity" />
 
 
         <Button
@@ -60,7 +80,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button_save"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_asset_tag" />
+            app:layout_constraintTop_toBottomOf="@id/et_stock_value" />
 
         <Button
             android:id="@+id/button_save"

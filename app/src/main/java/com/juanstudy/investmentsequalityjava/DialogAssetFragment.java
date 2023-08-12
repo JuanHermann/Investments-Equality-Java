@@ -35,7 +35,7 @@ public class DialogAssetFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.etAssetTag.requestFocus();
+        binding.etStockName.requestFocus();
 
         setOnClick();
     }
@@ -43,9 +43,9 @@ public class DialogAssetFragment extends Fragment {
     private void setOnClick() {
         binding.buttonCancel.setOnClickListener(view -> dismiss());
         binding.constraintParent.setOnClickListener(view -> dismiss());
-        binding.etAssetTag.addTextChangedListener(getTextWatcher());
+        binding.etStockName.addTextChangedListener(getTextWatcher());
         binding.buttonSave.setOnClickListener(view -> {
-            viewModel.insert(new Asset(binding.etAssetTag.getText().toString()));
+            viewModel.insert(new Asset(binding.etStockName.getText().toString(),Integer.parseInt( binding.etStockQuantity.getText().toString()),Double.parseDouble(binding.etStockValue.getText().toString())));
             dismiss();
         });
     }

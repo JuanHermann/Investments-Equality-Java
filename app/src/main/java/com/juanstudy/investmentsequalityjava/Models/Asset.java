@@ -13,11 +13,11 @@ public class Asset {
     private Integer dataCom;
 
 
-    public Asset(String tag) {
+    public Asset(String tag,int quantity, Double price) {
         this.id = null;
         this.tag = tag;
-        this.quantity = 0;
-        this.price = 0.0;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     public Integer getId() {
