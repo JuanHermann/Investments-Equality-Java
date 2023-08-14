@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAdapter() {
-        adapter = new AssetsAdapter();
+        adapter = new AssetsAdapter(this);
         binding.listAssets.setAdapter(adapter);
 
     }
@@ -65,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAssets().observe(this, assets -> {
             adapter.setAssets(assets);
             binding.listAssets.scrollToPosition(adapter.getItemCount());
-//todo remove after tests
-//            viewModel.getPapersInfo(getCallbackAssetsInfo());
-
-
         });
 
     }

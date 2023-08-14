@@ -10,14 +10,16 @@ public class Asset {
     private String tag;
     private Integer quantity;
     private Double price;
+    private Double mediumPrice;
     private Integer dataCom;
 
 
-    public Asset(String tag,int quantity, Double price) {
+    public Asset(String tag,int quantity,  Double mediumPrice) {
         this.id = null;
         this.tag = tag;
         this.quantity = quantity;
-        this.price = price;
+        this.price = 0.0;
+        this.mediumPrice=mediumPrice;
     }
 
     public Integer getId() {
@@ -58,5 +60,13 @@ public class Asset {
 
     public void setDataCom(Integer dataCom) {
         this.dataCom = dataCom;
+    }
+
+    public Double getMediumPrice() {
+        return mediumPrice;
+    }
+
+    public void setMediumPrice(Double mediumPrice) {
+        this.mediumPrice = mediumPrice;
     }
 }

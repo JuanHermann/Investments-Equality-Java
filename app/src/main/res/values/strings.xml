@@ -30,4 +30,5 @@
     <string name="inform_stock_name">Informe o nome da ação</string>
     <string name="input_insert">Cadastro</string>
     <string name="input_edit">Edição</string>
+    <string name="show_value">R$ %s</string>
 </resources>
